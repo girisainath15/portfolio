@@ -227,9 +227,12 @@ function Binary() {
       }
     }
     // a few big, out-of-focus digits floating near the flight path
+    const windowZ = projects.map((_, i) => stopZ(i + 1) - WIN_DIST);
     for (let i = 0; i < 90; i++) {
       const sx = rand() < 0.5 ? -1 : 1;
-      pos.push(sx * (1.7 + rand() * 2.1), FLOOR + 0.6 + rand() * (H - 1.2), Z_FAR + rand() * LEN);
+      const z = Z_FAR + rand() * LEN;
+      if (windowZ.some((wz) => Math.abs(z - wz) < 3.2)) continue; // never float in front of a project window
+      pos.push(sx * (1.7 + rand() * 2.1), FLOOR + 0.6 + rand() * (H - 1.2), z);
       col.push(rand());
       row.push(rand());
       size.push(0.34 + rand() * 0.3);

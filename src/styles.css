@@ -1720,12 +1720,283 @@ svg {
   border-top: 1px solid var(--line);
 }
 .stack-list li {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 12px;
-  padding: 8px 6px;
   border-bottom: 1px solid var(--line);
   transition: background 0.25s;
+}
+.stack-row {
+  display: grid;
+  grid-template-columns: 172px minmax(0, 1fr) 18px;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 6px;
+  text-align: left;
+  cursor: pointer;
+}
+.stack-go {
+  align-self: center;
+  color: var(--text-3);
+  transition: color 0.25s, transform 0.25s var(--ease);
+}
+.stack-row:hover .stack-go,
+.stack-row:focus-visible .stack-go {
+  color: var(--cyan);
+  transform: scale(1.3);
+}
+.radar-pt,
+.radar-label {
+  cursor: pointer;
+}
+.stack-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font: 500 11.5px/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--cyan);
+}
+.holo-dot {
+  width: 8px;
+  height: 8px;
+  rotate: 45deg;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------- skill hologram */
+.holo {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 3vw, 36px);
+  animation: fade-in 0.3s ease;
+}
+.holo-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 5, 7, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.holo-panel {
+  --bk-in: -1px;
+  --bk-s: 22px;
+  --bk-t: 2px;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  width: min(1120px, 100%);
+  height: min(760px, 100%);
+  background: linear-gradient(180deg, rgba(5, 19, 25, 0.95), rgba(2, 9, 12, 0.97));
+  border: 1px solid var(--line-2);
+  box-shadow: 0 0 80px -20px rgba(94, 242, 227, 0.35);
+  animation: holo-in 0.55s var(--ease);
+}
+.holo-panel::after {
+  content: '';
+  position: absolute;
+  inset: var(--bk-in);
+  pointer-events: none;
+  background:
+    linear-gradient(var(--cyan) 0 0) left top / var(--bk-s) var(--bk-t),
+    linear-gradient(var(--cyan) 0 0) left top / var(--bk-t) var(--bk-s),
+    linear-gradient(var(--cyan) 0 0) right top / var(--bk-s) var(--bk-t),
+    linear-gradient(var(--cyan) 0 0) right top / var(--bk-t) var(--bk-s),
+    linear-gradient(var(--cyan) 0 0) left bottom / var(--bk-s) var(--bk-t),
+    linear-gradient(var(--cyan) 0 0) left bottom / var(--bk-t) var(--bk-s),
+    linear-gradient(var(--cyan) 0 0) right bottom / var(--bk-s) var(--bk-t),
+    linear-gradient(var(--cyan) 0 0) right bottom / var(--bk-t) var(--bk-s);
+  background-repeat: no-repeat;
+}
+@keyframes holo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(14px);
+    filter: blur(6px);
+  }
+}
+.holo-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px 0;
+}
+.holo-title {
+  flex: 1;
+  margin: 0;
+  font: 700 clamp(20px, 2.6vw, 30px)/1.1 var(--font-display);
+  text-shadow: 0 0 24px rgba(94, 242, 227, 0.4);
+}
+.holo-title b {
+  margin-left: 8px;
+  font: 600 14px var(--font-mono);
+  color: var(--cyan);
+  vertical-align: middle;
+}
+.holo-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 12px 16px 0;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.holo-stage:active {
+  cursor: grabbing;
+}
+.holo-canvas {
+  z-index: -1;
+  animation: holo-flicker 7s steps(1) infinite;
+}
+@keyframes holo-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41% {
+    opacity: 0.86;
+  }
+  42% {
+    opacity: 1;
+  }
+  77% {
+    opacity: 0.9;
+  }
+  78% {
+    opacity: 1;
+  }
+}
+.holo-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(180deg, rgba(94, 242, 227, 0.05) 0 1px, transparent 1px 4px);
+  mix-blend-mode: screen;
+}
+.holo-scan::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18%;
+  background: linear-gradient(180deg, transparent, rgba(94, 242, 227, 0.07), transparent);
+  animation: holo-sweep 4.5s linear infinite;
+}
+@keyframes holo-sweep {
+  from {
+    top: -20%;
+  }
+  to {
+    top: 110%;
+  }
+}
+.holo-tags {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.holo-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.holo-tag > span {
+  position: absolute;
+  left: 0;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  translate: -50% 0;
+  padding: 6px 11px;
+  font: 600 13px/1.2 var(--font-mono);
+  white-space: nowrap;
+  color: #e9fffd;
+  background: linear-gradient(180deg, rgba(10, 52, 56, 0.72), rgba(4, 22, 26, 0.72));
+  border: 1px solid rgba(94, 242, 227, 0.55);
+  box-shadow: 0 0 18px -4px rgba(94, 242, 227, 0.7), inset 0 0 12px rgba(94, 242, 227, 0.12);
+  text-shadow: 0 0 8px rgba(94, 242, 227, 0.8);
+}
+.holo-tag > span::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 13px;
+  background: linear-gradient(180deg, rgba(94, 242, 227, 0.8), transparent);
+}
+.holo-tag i {
+  font-style: normal;
+  font-size: 10px;
+  color: var(--cyan);
+  opacity: 0.8;
+}
+.holo-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  margin: 0;
+  text-align: center;
+  font: 500 10.5px var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  pointer-events: none;
+}
+.holo-areas {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 16px;
+}
+.holo-chips {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+.chip.is-on {
+  color: #04252b;
+  background: var(--ice);
+  border-color: var(--ice);
+}
+@media (max-width: 640px) {
+  .holo {
+    padding: 0;
+  }
+  .holo-panel {
+    height: 100%;
+    border: 0;
+  }
+  .holo-head .hud-tab {
+    display: none;
+  }
+  .holo-tag > span {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  .holo-chips {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .holo-chips .chip {
+    flex: none;
+  }
+  .holo-hint {
+    letter-spacing: 0.08em;
+  }
 }
 .stack-list li:hover,
 .stack-list li.is-hl {
@@ -1973,7 +2244,7 @@ svg {
   --bk-in: -1px;
   --bk-s: 16px;
   padding: 22px 24px 24px;
-  background: linear-gradient(180deg, rgba(5, 19, 25, 0.86), rgba(3, 12, 16, 0.92));
+  background: linear-gradient(180deg, rgba(5, 19, 25, 0.97), rgba(3, 12, 16, 0.98));
   border: 1px solid var(--line-2);
   box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9), 0 0 50px -30px rgba(94, 242, 227, 0.4);
 }

@@ -58,7 +58,7 @@ export const about = {
     'Proven track record taking PoCs to production — 50+ teams onboarded at 99.9% uptime.',
   ],
   education: "Bachelor's in Computer Science & Engineering (Data Science) · GITAM University · 2020–24 · CGPA 9.19/10",
-  certs: 'Microsoft Azure AZ-900 · Azure AI-900',
+  certs: 'AWS Certified Developer – Associate · Microsoft Azure AZ-900 · Azure AI-900',
 };
 
 // `git log` of the job, newest first.
@@ -67,7 +67,7 @@ export const career = [
   { hash: 'd3a9e17', when: '2025–26', title: 'Data Exploration Agent', role: 'Senior Associate — Agentic AI Engineer', note: 'Multi-agent schema mapping · 80%+ accuracy · months → weeks' },
   { hash: 'b7e2c05', when: '2025', title: 'RAGAS — RAG as a Service', role: 'Senior AI/ML Associate Engineer', note: 'Latency 9s → 4s · +35% throughput · 30+ teams' },
   { hash: '92ac4f1', when: '2024', title: 'SSGPT & RAI SDK', role: 'AI/ML Python Developer · joined State Street, Jan 2024', note: 'Self-service copilot and the guardrailed LLM gateway behind it' },
-  { hash: '0e15a3b', when: '2020–24', title: "Bachelor's, CSE (Data Science)", role: 'GITAM University · CGPA 9.19/10', note: 'Certified: Azure AZ-900 · Azure AI-900', root: true },
+  { hash: '0e15a3b', when: '2020–24', title: "Bachelor's, CSE (Data Science)", role: 'GITAM University · CGPA 9.19/10', note: 'Certified: AWS Developer – Associate · Azure AZ-900 · Azure AI-900', root: true },
 ];
 
 // Data Exploration Agent topology. x/y are SVG coordinates in a 600×350 viewBox.
@@ -100,16 +100,18 @@ export const agentGraph = {
   ],
 };
 
-// Stack radar: one axis per area, plotted by how many tools the résumé lists for it.
+// Stack radar: one axis per area, plotted by how many tools are listed for it (6–10 each).
+// Click an area on the page to project it as a hologram. Every item traces back to the résumés or certifications.
 export const stack = [
-  { id: 'backend', label: 'Backend', items: ['Python', 'FastAPI', 'REST APIs', 'Pydantic', 'SQLAlchemy'] },
-  { id: 'agents', label: 'Agents', items: ['LangGraph', 'LangChain', 'DeepAgents', 'LangSmith', 'MCP', 'Agent Skills'] },
+  { id: 'backend', label: 'Backend', items: ['Python', 'FastAPI', 'Django', 'REST APIs', 'Pydantic', 'SQLAlchemy', 'Microservices', 'RBAC · Azure AD'] },
+  { id: 'agents', label: 'Agents', items: ['LangGraph', 'LangChain', 'LlamaIndex', 'DeepAgents', 'LangSmith', 'MCP', 'Agent Skills', 'Agentic RAG'] },
   { id: 'rag', label: 'RAG & LLMOps', items: ['RAG pipelines', 'Retrieval optimisation', 'Hybrid search', 'Reranking', 'Chunking strategies', 'Context management', 'LLM evaluation', 'Observability', 'Guardrails', 'Jailbreak detection'] },
-  { id: 'ml', label: 'ML / DL', items: ['PyTorch', 'Transformers', 'HuggingFace', 'Fine-tuning', 'Ragas evals', 'DeepEval', 'LLM benchmarking'] },
+  { id: 'ml', label: 'ML / DL', items: ['PyTorch', 'Transformers', 'HuggingFace', 'Fine-tuning', 'BERT classifiers', 'Ragas evals', 'DeepEval'] },
   { id: 'data', label: 'Data', items: ['PostgreSQL + PGVector', 'ChromaDB', 'DuckDB', 'ClickHouse', 'SQLite', 'Redis', 'DiskCache', 'Neo4j', 'Databricks Delta'] },
-  { id: 'cloud', label: 'Cloud & DevOps', items: ['Azure', 'Azure AI Foundry', 'Azure DevOps CI/CD', 'Docker', 'Kubernetes', 'Helm', 'Nginx'] },
-  { id: 'perf', label: 'Concurrency', items: ['AsyncIO', 'Multithreading', 'Multiprocessing', 'Parallel processing'] },
-  { id: 'test', label: 'Testing', items: ['PyTest', 'FastAPI TestClient', 'Selenium', 'Locust'] },
+  // Azure from State Street work; AWS services from the AWS Certified Developer – Associate.
+  { id: 'cloud', label: 'Cloud & DevOps', items: ['Azure', 'Azure AI Foundry', 'Azure DevOps CI/CD', 'AWS Lambda', 'AWS API Gateway', 'AWS S3', 'AWS DynamoDB', 'Docker', 'Kubernetes', 'Helm'] },
+  { id: 'perf', label: 'Performance', items: ['AsyncIO', 'Multithreading', 'Multiprocessing', 'Parallel processing', 'Caching', 'Latency optimisation'] },
+  { id: 'test', label: 'Testing & tooling', items: ['PyTest', 'FastAPI TestClient', 'Selenium', 'Locust load tests', 'Postman', 'Automated LLM evals'] },
 ];
 
 export const dailyTools = ['VS Code', 'Postman', 'GitHub', 'Jupyter', 'Docker Desktop', 'GitHub Copilot', 'Claude', 'ChatGPT'];
@@ -334,8 +336,8 @@ export const knowledge = [
   },
   {
     id: 'edu', source: 'résumé · education',
-    keys: ['education', 'degree', 'college', 'university', 'gitam', 'cgpa', 'gpa', 'study', 'studied', 'certification', 'certifications', 'certified', 'az', 'ai900', 'az900', 'graduate'],
-    text: "I studied Computer Science and Engineering with a Data Science specialisation at GITAM University (2020–2024) and graduated with a 9.19/10 CGPA. I hold Microsoft's Azure AZ-900 and AI-900 certifications.",
+    keys: ['education', 'degree', 'college', 'university', 'gitam', 'cgpa', 'gpa', 'study', 'studied', 'certification', 'certifications', 'certified', 'az', 'ai900', 'az900', 'graduate', 'aws', 'amazon', 'associate'],
+    text: "I studied Computer Science and Engineering with a Data Science specialisation at GITAM University (2020–2024) and graduated with a 9.19/10 CGPA. I'm an AWS Certified Developer – Associate and hold Microsoft's Azure AZ-900 and AI-900 certifications.",
   },
   {
     id: 'contact', source: 'résumé · header',

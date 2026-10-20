@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { about, agentGraph, career, dailyTools, impact, inventory, knowledge, stack, suggestions } from '../data.js';
 import { useInView } from '../lib/hooks.js';
 import { createRetriever } from '../lib/retriever.js';
 import { useMotion } from '../lib/store.js';
 import { Panel, SectionHead } from './Bits.jsx';
+import SkillHolo from './SkillHolo.jsx';
 
 const PROMPT = 'giri@portfolio:~$';
 
@@ -272,6 +273,9 @@ function AgentGraph() {
 
 function StackRadar() {
   const [hl, setHl] = useState(null);
+  const [holo, setHolo] = useState(null); // index of the area being projected
+  const switchHolo = useCallback((d) => setHolo((h) => (h + d + stack.length) % stack.length), []);
+  const closeHolo = useCallback(() => setHolo(null), []);
   const n = stack.length;
   const max = Math.max(...stack.map((s) => s.items.length));
   const cx = 210;
@@ -305,19 +309,22 @@ function StackRadar() {
           </g>
           <polygon className="radar-value" points={vals.map((p) => p.join(',')).join(' ')} />
           {vals.map(([x, y], i) => (
-            <circle key={stack[i].id} className={`radar-pt ${hl === i ? 'is-hl' : ''}`} cx={x} cy={y} r={hl === i ? 5 : 3.2} />
+            <circle key={stack[i].id} className={`radar-pt ${hl === i ? 'is-hl' : ''}`} cx={x} cy={y} r={hl === i ? 5 : 3.2} onClick={() => setHolo(i)} onMouseEnter={() => setHl(i)} onMouseLeave={() => setHl(null)} />
           ))}
           {stack.map((s, i) => {
             const [x, y] = pt(i, 1.17);
             const c = Math.cos(ang(i));
             const anchor = Math.abs(c) < 0.2 ? 'middle' : c > 0 ? 'start' : 'end';
             return (
-              <text key={s.id} className={`radar-label ${hl === i ? 'is-hl' : ''}`} x={x} y={y + 4} textAnchor={anchor}>
+              <text key={s.id} className={`radar-label ${hl === i ? 'is-hl' : ''}`} x={x} y={y + 4} textAnchor={anchor} onClick={() => setHolo(i)} onMouseEnter={() => setHl(i)} onMouseLeave={() => setHl(null)}>
                 {s.label}
               </text>
             );
           })}
         </svg>
+        <p className="stack-hint">
+          <span className="holo-dot" aria-hidden="true" /> Click any area to project its skills as a hologram
+        </p>
         <p className="stack-tools">
           <span className="hud-label">daily tools</span> {dailyTools.join(' · ')}
         </p>
@@ -325,13 +332,19 @@ function StackRadar() {
       <ul className="stack-list">
         {stack.map((s, i) => (
           <li key={s.id} className={hl === i ? 'is-hl' : ''} onMouseEnter={() => setHl(i)} onMouseLeave={() => setHl(null)}>
-            <span className="stack-name">
-              {s.label} <b>{s.items.length}</b>
-            </span>
-            <span className="stack-items">{s.items.join(' · ')}</span>
+            <button type="button" className="stack-row" onClick={() => setHolo(i)} aria-haspopup="dialog" aria-label={`Project ${s.label} as a hologram: ${s.items.join(', ')}`}>
+              <span className="stack-name">
+                {s.label} <b>{s.items.length}</b>
+              </span>
+              <span className="stack-items">{s.items.join(' · ')}</span>
+              <span className="stack-go" aria-hidden="true">
+                ◈
+              </span>
+            </button>
           </li>
         ))}
       </ul>
+      {holo !== null && <SkillHolo index={holo} onClose={closeHolo} onSwitch={switchHolo} />}
     </div>
   );
 }
@@ -471,7 +484,7 @@ export default function Overview() {
           <Panel tab="Agent topology" meta="Data Exploration Agent · live" className="p-agents" delay={90}>
             <AgentGraph />
           </Panel>
-          <Panel tab="Stack scan" meta="tools per area, from the résumé" className="p-stack">
+          <Panel tab="Stack scan" meta="tools per area · résumés + certifications" className="p-stack">
             <StackRadar />
           </Panel>
           <Panel tab="ask.py" meta="local retriever · no LLM" className="p-ask" id="ask">

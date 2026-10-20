@@ -35,7 +35,8 @@ export default function Systems() {
       cards.current.forEach((el, i) => {
         if (!el) return;
         const d = f - i;
-        const o = Math.max(0, Math.min(1, 1 - Math.abs(d) * 2.5));
+        // fully solid near its stop, then a quick fade while flying between stops
+        const o = Math.max(0, Math.min(1, 1 - (Math.abs(d) - 0.12) * 3.4));
         el.style.opacity = o.toFixed(3);
         el.style.translate = `0 ${(-d * 46).toFixed(1)}px`;
         el.style.pointerEvents = o > 0.6 ? 'auto' : 'none';
@@ -45,16 +46,55 @@ export default function Systems() {
       const a = Math.round(f);
       setActive((prev) => (prev === a ? prev : a));
     };
+    // Snap: once scrolling comes to rest inside the corridor, glide to the next stop in the direction of
+    // travel (a small nudge settles back), so every pause lands squarely on a project window.
+    let idle = 0;
+    let restY = window.scrollY; // where the last scroll came to rest
+    let touching = false;
+    const snap = () => {
+      if (touching) return;
+      const y = window.scrollY;
+      const moved = y - restY;
+      restY = y;
+      const r = sec.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      if (span <= 0 || r.top > 0 || -r.top >= span) return; // not pinned: leave normal scrolling alone
+      const stopPx = span / (STOPS - 1);
+      const f = -r.top / stopPx;
+      let target = Math.round(f);
+      if (Math.abs(moved) > stopPx * 0.15) target = moved > 0 ? Math.ceil(f - 0.05) : Math.floor(f + 0.05);
+      target = Math.max(0, Math.min(STOPS - 1, target));
+      if (Math.abs(f - target) < 0.01) return;
+      const goal = r.top + y + target * stopPx;
+      restY = goal;
+      scrollToY(goal);
+    };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
+      clearTimeout(idle);
+      idle = setTimeout(snap, 160);
+    };
+    const onTouchStart = () => {
+      touching = true;
+      clearTimeout(idle);
+    };
+    const onTouchEnd = () => {
+      touching = false;
+      clearTimeout(idle);
+      idle = setTimeout(snap, 220); // let momentum scrolling finish first
     };
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(idle);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
 

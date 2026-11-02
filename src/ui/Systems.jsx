@@ -129,7 +129,7 @@ export default function Systems() {
             <h2 className="sec-title" id="systems-title">
               Systems I&rsquo;ve built
             </h2>
-            <p className="sec-lead">Five platforms from my time at State Street. Each window down this corridor is one of them — scroll to fly through.</p>
+            <p className="sec-lead">Five platforms from my time at State Street. Each window down this corridor is one of them, scroll to fly through.</p>
             <ol className="sys-index">
               {projects.map((p) => (
                 <li key={p.id}>
@@ -178,7 +178,7 @@ export default function Systems() {
 
           <article className="sys-card sys-exit" ref={(el) => (cards.current[STOPS - 1] = el)} aria-hidden="true">
             <p className="hud-label">end of corridor</p>
-            <p className="sys-exit-title">Next — uplink</p>
+            <p className="sys-exit-title">Next: uplink</p>
             <ArrowDown width={18} height={18} />
           </article>
         </div>

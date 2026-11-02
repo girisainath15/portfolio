@@ -1,5 +1,5 @@
 // All content comes from Giri's 2025–2027 résumés (public/resume.pdf is the 2027 one).
-// Edit text, numbers and links here — the rest of the site reads from this file.
+// Edit text, numbers and links here, the rest of the site reads from this file.
 
 export const profile = {
   name: 'Peruri Giri Sainath',
@@ -16,7 +16,7 @@ export const profile = {
   linkedinShort: 'in/girisainath',
   github: '', // add a GitHub URL here and a GitHub button appears in the contact section
   resume: 'resume.pdf',
-  tagline: 'I build RAG platforms, multi-agent systems and LLM infrastructure — and take them from PoC to production.',
+  tagline: 'I build RAG platforms, multi-agent systems and LLM infrastructure, and take them from PoC to production.',
 };
 
 // Hero monitor (top-right HUD)
@@ -55,7 +55,7 @@ export const about = {
   whoami: 'Peruri Giri Sainath · Senior Associate, Agentic AI Engineer @ State Street',
   summary: [
     'Nearly three years at State Street building Python backends and LLM systems: RAG platforms, multi-agent orchestration, guardrails and observability.',
-    'Proven track record taking PoCs to production — 50+ teams onboarded at 99.9% uptime.',
+    'Proven track record taking PoCs to production, 50+ teams onboarded at 99.9% uptime.',
   ],
   education: "Bachelor's in Computer Science & Engineering (Data Science) · GITAM University · 2020–24 · CGPA 9.19/10",
   certs: 'AWS Certified Developer – Associate · Microsoft Azure AZ-900 · Azure AI-900',
@@ -63,9 +63,9 @@ export const about = {
 
 // `git log` of the job, newest first.
 export const career = [
-  { hash: 'f41c0de', when: 'Now', title: 'Enterprise AI Observability Platform', role: 'Senior Associate — Agentic AI Engineer', note: '12+ FastAPI microservices · OpenTelemetry tracing · 1–2 min to dashboard', head: true },
-  { hash: 'd3a9e17', when: '2025–26', title: 'Data Exploration Agent', role: 'Senior Associate — Agentic AI Engineer', note: 'Multi-agent schema mapping · 80%+ accuracy · months → weeks' },
-  { hash: 'b7e2c05', when: '2025', title: 'RAGAS — RAG as a Service', role: 'Senior AI/ML Associate Engineer', note: 'Latency 9s → 4s · +35% throughput · 30+ teams' },
+  { hash: 'f41c0de', when: 'Now', title: 'Enterprise AI Observability Platform', role: 'Senior Associate, Agentic AI Engineer', note: '12+ FastAPI microservices · OpenTelemetry tracing · 1–2 min to dashboard', head: true },
+  { hash: 'd3a9e17', when: '2025–26', title: 'Data Exploration Agent', role: 'Senior Associate, Agentic AI Engineer', note: 'Multi-agent schema mapping · 80%+ accuracy · months → weeks' },
+  { hash: 'b7e2c05', when: '2025', title: 'RAGAS: RAG as a Service', role: 'Senior AI/ML Associate Engineer', note: 'Latency 9s → 4s · +35% throughput · 30+ teams' },
   { hash: '92ac4f1', when: '2024', title: 'SSGPT & RAI SDK', role: 'AI/ML Python Developer · joined State Street, Jan 2024', note: 'Self-service copilot and the guardrailed LLM gateway behind it' },
   { hash: '0e15a3b', when: '2020–24', title: "Bachelor's, CSE (Data Science)", role: 'GITAM University · CGPA 9.19/10', note: 'Certified: AWS Developer – Associate · Azure AZ-900 · Azure AI-900', root: true },
 ];
@@ -79,7 +79,7 @@ export const agentGraph = {
     { id: 'eda', label: 'EDA agent', sub: 'SQL · Python', x: 300, y: 182, desc: 'Generates, validates and executes SQL queries and Python code so SMEs understand the source data quickly.' },
     { id: 'gen', label: 'General', sub: 'data-model Q&A', x: 496, y: 182, desc: 'Handles general data-model questions and process clarifications.' },
     { id: 'val', label: 'Validator', sub: 'rules · consistency', x: 202, y: 260, desc: 'Reviews Researcher and EDA output for correctness, consistency and alignment with the target data-model rules, and flags mismatches.' },
-    { id: 'map', label: 'Mapping file ✓', x: 202, y: 326, io: true, desc: 'Validated mapping recommendations — 80%+ accurate, in 2–3 weeks instead of 6–8 months.' },
+    { id: 'map', label: 'Mapping file ✓', x: 202, y: 326, io: true, desc: 'Validated mapping recommendations, 80%+ accurate, in 2–3 weeks instead of 6–8 months.' },
     { id: 'ans', label: 'Guidance ✓', x: 496, y: 326, io: true, desc: 'Answers go straight back to the SME.' },
   ],
   edges: [['q', 'orch'], ['orch', 'res'], ['orch', 'eda'], ['orch', 'gen'], ['res', 'val'], ['eda', 'val'], ['val', 'map'], ['gen', 'ans']],
@@ -135,7 +135,7 @@ export const projects = [
     ],
     stack: ['Python', 'FastAPI', 'LangChain', 'PGVector', 'Azure Form Recognizer'],
     file: 'ragas/platform.py',
-    source: `# RAGAS — RAG as a Service
+    source: `# RAGAS: RAG as a Service
 # One platform, so apps stop rebuilding pipelines.
 
 kb = KnowledgeBase(
@@ -168,7 +168,7 @@ hits = kb.retrieve(question, top_k=8)
     ],
     stack: ['LangGraph', 'DeepAgents', 'RAG', 'SQL', 'Python'],
     file: 'dea/graph.py',
-    source: `# Data Exploration Agent — multi-agent mapping
+    source: `# Data Exploration Agent: multi-agent mapping
 
 graph = StateGraph(MappingState)
 
@@ -192,7 +192,7 @@ graph.add_edge("general", END)
     when: 'Now',
     title: 'AI Observability Platform',
     subtitle: 'See every token',
-    blurb: 'Enterprise-wide, centralised tracing, evaluation and alerting for LLM applications — instrument an app once and it shows up on the dashboards.',
+    blurb: 'Enterprise-wide, centralised tracing, evaluation and alerting for LLM applications, instrument an app once and it shows up on the dashboards.',
     stats: [['12+', 'microservices'], ['1–2 min', 'trace → dashboard'], ['Org-wide', 'LLM telemetry']],
     details: [
       '12+ FastAPI microservices running on Kubernetes.',
@@ -202,7 +202,7 @@ graph.add_edge("general", END)
     ],
     stack: ['FastAPI', 'Kubernetes', 'OpenTelemetry', 'ClickHouse', 'Databricks', 'Arize AI'],
     file: 'observability/instrument.py',
-    source: `# Enterprise AI Observability — see every token
+    source: `# Enterprise AI Observability: see every token
 
 observe.init(
     service="your-llm-app",
@@ -236,7 +236,7 @@ def answer(question): ...
     ],
     stack: ['Python', 'Fine-tuned BERT', 'Azure OpenAI', 'Grafana'],
     file: 'rai_sdk/client.py',
-    source: `# RAI SDK — one API in front of every LLM
+    source: `# RAI SDK: one API in front of every LLM
 
 client = RAIClient(app="ssgenai")
 
@@ -259,7 +259,7 @@ reply = client.chat(
     when: '2024 →',
     title: 'SSGenAI',
     subtitle: 'Self-service copilot (formerly SSGPT)',
-    blurb: 'A self-service copilot platform where teams build their own LLM apps — DomainQA, document RAG and Questionnaire — behind Azure AD roles.',
+    blurb: 'A self-service copilot platform where teams build their own LLM apps, DomainQA, document RAG and Questionnaire, behind Azure AD roles.',
     stats: [['99.9%', 'uptime'], ['20+', 'teams'], ['3', 'app types']],
     details: [
       'Runtime choice of chat and embedding models through the RAI SDK, with guardrails and PII masking.',
@@ -269,7 +269,7 @@ reply = client.chat(
     ],
     stack: ['Azure AD', 'RAI SDK', 'RAGAS', 'PGVector', 'Helm', 'Azure Pipelines'],
     file: 'ssgenai/app.yaml',
-    source: `# SSGenAI (formerly SSGPT) — self-service copilot
+    source: `# SSGenAI (formerly SSGPT): self-service copilot
 
 app:
   type: rag                # domain_qa | rag | questionnaire
@@ -287,12 +287,12 @@ deploy: [dev, uat, prod]   # Helm via Azure Pipelines
   },
 ];
 
-// Knowledge base for the in-browser "ask" console. Plain keyword retrieval — no LLM, no server.
+// Knowledge base for the in-browser "ask" console. Plain keyword retrieval, no LLM, no server.
 export const knowledge = [
   {
     id: 'role', source: 'résumé · summary',
     keys: ['who', 'role', 'job', 'work', 'experience', 'years', 'state', 'street', 'current', 'title', 'about', 'yourself', 'introduce', 'hi', 'hello', 'hey', 'giri'],
-    text: "I'm an Agentic AI Engineer (Senior Associate) at State Street, where I've worked since January 2024 — nearly three years. I build Python backends and LLM systems: RAG platforms, multi-agent orchestration, guardrails and AI observability. I've taken PoCs to production and onboarded 50+ teams at 99.9% uptime.",
+    text: "I'm an Agentic AI Engineer (Senior Associate) at State Street, where I've worked since January 2024, nearly three years. I build Python backends and LLM systems: RAG platforms, multi-agent orchestration, guardrails and AI observability. I've taken PoCs to production and onboarded 50+ teams at 99.9% uptime.",
   },
   {
     id: 'ragas', source: 'résumé · RAGAS',
@@ -342,7 +342,7 @@ export const knowledge = [
   {
     id: 'contact', source: 'résumé · header',
     keys: ['contact', 'email', 'mail', 'reach', 'hire', 'hiring', 'connect', 'linkedin', 'talk', 'available', 'location', 'where', 'based', 'opportunity', 'opportunities', 'resume', 'cv'],
-    text: "Email is best — girisainath15@gmail.com — or LinkedIn at linkedin.com/in/girisainath. I'm based in Telangana, India (IST, UTC+5:30). The full résumé PDF is linked at the top of the page.",
+    text: "Email is best, girisainath15@gmail.com, or LinkedIn at linkedin.com/in/girisainath. I'm based in Telangana, India (IST, UTC+5:30). The full résumé PDF is linked at the top of the page.",
   },
 ];
 

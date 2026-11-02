@@ -19,14 +19,14 @@ function ContactForm() {
   const submit = (e) => {
     e.preventDefault();
     if (!form.message.trim()) {
-      setStatus({ kind: 'warn', text: 'Write a message first — one line is plenty.' });
+      setStatus({ kind: 'warn', text: 'Write a message first, one line is plenty.' });
       msg.current?.focus();
       return;
     }
     const name = form.name.trim();
-    const subject = `[Portfolio] ${form.topic}${name ? ` — ${name}` : ''}`;
+    const subject = `[Portfolio] ${form.topic}${name ? `: ${name}` : ''}`;
     const sign = [name, form.email.trim()].filter(Boolean).join(' · ');
-    const body = `${form.message.trim()}\n\n— ${sign || 'sent from your portfolio'}`;
+    const body = `${form.message.trim()}\n\n${sign ? `From ${sign}` : 'Sent from your portfolio'}`;
     window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setStatus({ kind: 'ok', text: 'Opening your mail app with everything filled in. Nothing opened? Copy the address on the right instead.' });
   };
@@ -105,7 +105,7 @@ function Socials() {
       const sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
-      setCopied('Selected — press Ctrl/⌘ + C');
+      setCopied('Selected: press Ctrl/⌘ + C');
     }
     setTimeout(() => setCopied(null), 2600);
   };
@@ -155,7 +155,7 @@ export default function Contact() {
           kicker="Uplink"
           id="contact-title"
           title="Let's build something that ships."
-          lead="Roles, collaborations, or a RAG / agents problem you want a second pair of eyes on — the channel is open."
+          lead="Roles, collaborations, or a RAG / agents problem you want a second pair of eyes on, the channel is open."
         />
 
         <div className="globe-frame">
@@ -218,7 +218,7 @@ export default function Contact() {
             <Socials />
             <div className="tip">
               <p>
-                <b>Boot tip:</b> “Transmit” opens your own mail app with the message pre-filled. This site is fully static — nothing you type is sent to a server.
+                <b>Boot tip:</b> “Transmit” opens your own mail app with the message pre-filled. This site is fully static, so nothing you type is sent to a server.
                 <span className="caret" aria-hidden="true" />
               </p>
               <a className="tip-link" href={profile.linkedin} target="_blank" rel="noreferrer">

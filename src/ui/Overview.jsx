@@ -351,7 +351,7 @@ function StackRadar() {
 
 /* ------------------------------------------------------------------ ask console */
 
-const FALLBACK = "That isn't in my résumé. Try RAGAS, the Data Exploration Agent, guardrails, observability or my stack — or just email me.";
+const FALLBACK = "That isn't in my résumé. Try RAGAS, the Data Exploration Agent, guardrails, observability or my stack, or just email me.";
 
 function AskConsole() {
   const retrieve = useMemo(() => createRetriever(knowledge), []);
@@ -391,7 +391,7 @@ function AskConsole() {
     <div className="ask">
       <div className="ask-l">
         <p className="ask-intro">
-          Ask about my work. Answers are retrieved from my résumé right here in your browser — keyword scoring over a dozen chunks. No LLM, no server, nothing you type leaves the page.
+          Ask about my work. Answers are retrieved from my résumé right here in your browser: keyword scoring over a dozen chunks. No LLM, no server, nothing you type leaves the page.
         </p>
         <div className="ask-chips">
           {suggestions.map((s) => (
@@ -469,7 +469,7 @@ export default function Overview() {
           kicker="Overview"
           id="overview-title"
           title="Mission control"
-          lead="Nearly three years at State Street on one screen: who I am, what moved, how my agents are wired — and a console that answers from my résumé."
+          lead="Nearly three years at State Street on one screen: who I am, what moved, how my agents are wired, and a console that answers from my résumé."
         />
         <div className="grid">
           <Panel tab="whoami" meta="tty1" className="p-term">

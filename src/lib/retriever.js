@@ -7,7 +7,7 @@ const STOP = new Set(
   ),
 );
 
-// Words that say "tell me about you" but not *what* — they count, just less than specific terms.
+// Words that say "tell me about you" but not *what*. They count, just less than specific terms.
 const GENERIC = new Set(['experience', 'work', 'job', 'years', 'role', 'current', 'about', 'use']);
 
 export function tokenize(text) {
@@ -20,7 +20,7 @@ export function tokenize(text) {
     .filter((t) => t.length > 1 && !STOP.has(t));
 }
 
-// Exact match, or a close inflection (agent/agents, retriever/retrievers) — not "fast" → "fastapi".
+// Exact match, or a close inflection (agent/agents, retriever/retrievers), not "fast" → "fastapi".
 const matches = (token, word) =>
   token === word ||
   (Math.min(token.length, word.length) >= 5 &&

@@ -32,7 +32,7 @@ export function MotionToggle({ className = 'ibtn' }) {
 export function Cluster({ onMenu }) {
   return (
     <div className="cluster">
-      <a className="ibtn ibtn--logo" href="#home" aria-label={`${profile.short} — home`}>
+      <a className="ibtn ibtn--logo" href="#home" aria-label={`${profile.short}, home`}>
         <Logo size={26} />
       </a>
       <MotionToggle />
@@ -92,7 +92,7 @@ export function TabBar({ onMenu }) {
 
   return (
     <header className={`tabbar ${shown ? 'is-on' : ''}`} inert={shown ? undefined : ''}>
-      <a className="tabbar-logo" href="#home" aria-label={`${profile.short} — back to top`}>
+      <a className="tabbar-logo" href="#home" aria-label={`${profile.short}, back to top`}>
         <Logo size={28} />
         <span>
           {profile.short}

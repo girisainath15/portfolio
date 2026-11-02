@@ -1,5 +1,5 @@
 /* =================================================================================================
-   Tokens — taken from the reference frames: near-black teal, mint/cyan glow, pale-cyan panel tabs,
+   Tokens, taken from the reference frames: near-black teal, mint/cyan glow, pale-cyan panel tabs,
    green agent nodes, magenta hotspots.
    ================================================================================================= */
 :root {
@@ -1346,7 +1346,7 @@ svg {
   color: var(--text-3);
 }
 
-/* "built" histogram under the rings — the reference's bar-chart panel, with real counts */
+/* "built" histogram under the rings, the reference's bar-chart panel, with real counts */
 .inventory {
   display: grid;
   gap: 12px;
@@ -2743,7 +2743,7 @@ svg {
     bottom: 16px;
     letter-spacing: 0.1em;
   }
-  /* phones hide the snippets, so the top-left is free — and the bottom edge is too narrow for two labels */
+  /* phones hide the snippets, so the top-left is free, and the bottom edge is too narrow for two labels */
   .fd-tag {
     left: 20px;
     top: 18px;
